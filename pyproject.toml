@@ -1,0 +1,27 @@
+[project]
+name = "mcp-template-python"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Sun-ZhenXing", email = "1006925066@qq.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.12",
+    "mcp>=1.9.3",
+    "uvicorn[standard]>=0.34.3",
+]
+
+[project.scripts]
+mcp-template-python = "mcp_template_python.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/mcp_template_python/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src/mcp_template_python"]
