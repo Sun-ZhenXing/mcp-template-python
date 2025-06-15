@@ -1,5 +1,4 @@
 # Environment files
-.env
 .env.*
 !.env.example
 
@@ -13,3 +12,18 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Docker files
+Dockerfile
+docker-compose.*
+
+# Git files
+.git/
+.gitignore
+
+# IDE files
+.idea/
+.vscode/
+
+# misc
+.DS_Store

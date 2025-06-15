@@ -35,7 +35,3 @@ async def div_nums(a: float, b: float) -> float:
     Divides the first number by the second.
     """
     return truediv(a, b)
-
-
-if __name__ == "__main__":
-    mcp.run()

@@ -9,12 +9,14 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.115.12",
-    "mcp>=1.9.3",
+    "mcp>=1.9.4",
     "uvicorn[standard]>=0.34.3",
 ]
 
 [project.scripts]
 mcp-template-python = "mcp_template_python.__main__:main"
+dev = "mcp_template_python.__main__:dev"
+prod = "mcp_template_python.__main__:main"
 
 [build-system]
 requires = ["hatchling"]
