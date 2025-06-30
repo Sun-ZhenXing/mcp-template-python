@@ -19,6 +19,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the MCP Template Python Server!"}
+
+
 for name, mcp in MCP_MAP.items():
     app.mount(f"/{name}/compatible", mcp.sse_app())
     app.mount(f"/{name}", mcp.streamable_http_app())

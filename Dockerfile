@@ -26,4 +26,4 @@ COPY --from=deps /app/.venv/ ./.venv/
 COPY . ./
 
 EXPOSE 3001
-CMD [ "uv", "run", "prod", "--host", "0.0.0.0" ]
+CMD [ "uv", "run", "--no-sync", "prod", "--host", "0.0.0.0" ]
