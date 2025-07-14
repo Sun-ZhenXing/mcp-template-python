@@ -16,4 +16,4 @@ services:
       dockerfile: Dockerfile
     image: ${DOCKER_REGISTRY:-docker.io}/local/mcp-template-python:${BUILD_VERSION:-latest}
     ports:
-      - "3001:3001"
+      - "3001:${PORT:-3001}"

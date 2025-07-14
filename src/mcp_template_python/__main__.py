@@ -2,6 +2,7 @@ import argparse
 import sys
 
 from .__about__ import __module_name__, __version__
+from .config import MCP_MAP, settings
 
 
 def main():
@@ -14,14 +15,14 @@ def main():
     )
     parser.add_argument(
         "--host",
-        default="127.0.0.1",
-        help="Host to bind to (default: 127.0.0.1)",
+        default=settings.default_host,
+        help=f"Host to bind to (default: {settings.default_host})",
     )
     parser.add_argument(
         "--port",
         type=int,
-        default=3001,
-        help="Port to listen on (default: 3001)",
+        default=settings.default_port,
+        help=f"Port to listen on (default: {settings.default_port})",
     )
     parser.add_argument(
         "--dev",
@@ -42,8 +43,7 @@ def main():
         sys.exit(0)
 
     if args.stdio:
-        from .app.math import mcp
-
+        mcp = MCP_MAP[settings.default_mcp]
         mcp.run()
     else:
         import uvicorn
@@ -57,7 +57,10 @@ def main():
         )
 
 
-def dev(host: str = "127.0.0.1", port: int = 3001):
+def dev(
+    host: str = settings.default_host,
+    port: int = settings.default_port,
+):
     """Run the MCP server in development mode."""
     import uvicorn
 

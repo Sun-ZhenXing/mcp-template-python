@@ -2,11 +2,7 @@ import contextlib
 
 from fastapi import FastAPI
 
-from .app.math import mcp as math
-
-MCP_MAP = {
-    "math": math,
-}
+from .config import MCP_MAP
 
 
 @contextlib.asynccontextmanager
@@ -23,6 +19,11 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def root():
     return {"message": "Welcome to the MCP Template Python Server!"}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
 
 
 for name, mcp in MCP_MAP.items():
