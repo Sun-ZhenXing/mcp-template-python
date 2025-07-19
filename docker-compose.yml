@@ -14,6 +14,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - PORT=${PORT:-3001}
     image: ${DOCKER_REGISTRY:-docker.io}/local/mcp-template-python:${BUILD_VERSION:-latest}
     ports:
-      - "3001:${PORT:-3001}"
+      - "${EXPOSE_PORT:-3001}:${PORT:-3001}"
+    env_file:
+      - .env

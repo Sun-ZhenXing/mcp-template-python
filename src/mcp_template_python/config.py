@@ -1,10 +1,4 @@
-from pydantic_settings import BaseSettings
-
-from .app.math import mcp as math
-
-MCP_MAP = {
-    "math": math,
-}
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -16,9 +10,14 @@ class Settings(BaseSettings):
     default_host: str = "127.0.0.1"
     default_port: int = 3001
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    instructions: str | None = None
+
+    model_config = SettingsConfigDict(
+        env_prefix="MCP_",
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="allow",
+    )
 
 
 settings = Settings()

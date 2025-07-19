@@ -2,7 +2,8 @@ import argparse
 import sys
 
 from .__about__ import __module_name__, __version__
-from .config import MCP_MAP, settings
+from .app import MCP_MAP
+from .config import settings
 
 
 def main():

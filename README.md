@@ -23,12 +23,18 @@ uv run dev
 
 可通过 <http://127.0.0.1:3001/math/mcp> 访问示例 MCP 接口（Streamable HTTP），或 <http://127.0.0.1:3001/math/compatible/sse> 访问 SSE 接口。
 
+通过 `--stdio` 来调用命令行：
+
+```bash
+uv run prod --stdio
+```
+
 ## 部署
 
 生产：
 
 ```bash
-uv run prod
+uv run --no-sync prod
 ```
 
 构建 Python Wheel 包：

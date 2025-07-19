@@ -20,6 +20,7 @@
     "fastapi",
     "fastmcp",
     "localtime",
+    "mcps",
     "pydantic",
     "PYPI",
     "pyproject",
