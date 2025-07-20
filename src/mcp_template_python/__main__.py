@@ -2,17 +2,25 @@ import argparse
 import sys
 
 from .__about__ import __module_name__, __version__
-from .app import MCP_MAP
 from .config import settings
 
 
 def main():
+    from .app import MCP_MAP
+
     parser = argparse.ArgumentParser(description="MCP Server")
 
     parser.add_argument(
         "--stdio",
         action="store_true",
         help="Run the server with STDIO (default: False)",
+    )
+    parser.add_argument(
+        "--mcp",
+        type=str,
+        default=settings.default_mcp,
+        choices=list(MCP_MAP.keys()),
+        help=f"Select the MCP to run in STDIO mode (default: {settings.default_mcp})",
     )
     parser.add_argument(
         "--host",
@@ -44,7 +52,10 @@ def main():
         sys.exit(0)
 
     if args.stdio:
-        mcp = MCP_MAP[settings.default_mcp]
+        mcp = MCP_MAP.get(args.mcp)
+        if mcp is None:
+            print(f"Error: MCP '{args.mcp}' not found.")
+            sys.exit(1)
         mcp.run()
     else:
         import uvicorn

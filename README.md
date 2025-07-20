@@ -1,57 +1,64 @@
-# MCP FastAPI 应用模板
+# MCP FastAPI Application Template
 
-本项目提供了 FastAPI 集成的 MCP 应用模板。
+🌏 [中文](./README.zh.md) | [English](./README.md)
 
-- [x] 支持多 MCP 挂载
-- [x] 支持命令行调用 Stdio 模式
-- [x] 支持 SSE / Streamable HTTP 兼容
-- [x] 支持打包分发
+This project provides an MCP application template integrated with FastAPI.
 
-## 开始
+- [x] Support for multiple MCP mounting
+- [x] Support for command-line invocation in Stdio mode
+- [x] Support for SSE / StreamableHTTP / WebSocket
+- [x] Support for packaging and distribution
 
-安装依赖：
+Starting from v0.1.2, we use `BetterFastMCP` to replace `FastMCP`, providing more comprehensive features than the official `FastMCP`:
+
+- [x] Support for Pydantic models as input parameters, enabling more complex input parameter types and convenient description addition
+- [x] Support for WebSocket as transport layer, access by `/{mcp_name}/websocket/ws`
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
 uv sync
 ```
 
-开发：
+Development:
 
 ```bash
 uv run dev
 ```
 
-可通过 <http://127.0.0.1:3001/math/mcp> 访问示例 MCP 接口（Streamable HTTP），或 <http://127.0.0.1:3001/math/compatible/sse> 访问 SSE 接口。
+You can access the example MCP interface (Streamable HTTP) via <http://127.0.0.1:3001/math/mcp>, or access the SSE interface via <http://127.0.0.1:3001/math/compatible/sse>.
 
-通过 `--stdio` 来调用命令行：
+Call via command line with `--stdio`:
 
 ```bash
 uv run prod --stdio
 ```
 
-## 部署
+## Deployment
 
-生产：
+Production:
 
 ```bash
 uv run --no-sync prod
 ```
 
-构建 Python Wheel 包：
+Build Python Wheel package:
 
 ```bash
 uv build
 ```
 
-## Docker 部署
+## Docker Deployment
 
-运行：
+Run:
 
 ```bash
 docker compose up -d
 ```
 
-仅构建：
+Build only:
 
 ```bash
 docker compose build
