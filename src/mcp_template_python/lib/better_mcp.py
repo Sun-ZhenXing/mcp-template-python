@@ -8,7 +8,6 @@ from mcp.server.auth.middleware.bearer_auth import (
 )
 from mcp.server.fastmcp import FastMCP
 from mcp.server.websocket import websocket_server
-from mcp.types import ToolAnnotations
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.authentication import AuthenticationMiddleware
@@ -158,23 +157,3 @@ class BetterFastMCP(FastMCP):
             middleware=middleware,
             lifespan=lambda app: self.session_manager.run(),
         )
-
-    def better_tool(
-        self,
-        name: str | None = None,
-        title: str | None = None,
-        description: str | None = None,
-        annotations: ToolAnnotations | None = None,
-        structured_output: bool | None = None,
-    ):
-        """Decorator to register a tool.
-        TODO: Implement a better tool function decorator.
-        """
-        # tool_mcp = self._tool_manager._tools
-        # existing = tool_mcp.get(name)
-        # if existing:
-        #     if self._tool_manager.warn_on_duplicate_tools:
-        #         logger.warning(f"Tool already exists: {tool.name}")
-        #     return existing
-        # self._tools[tool.name] = tool
-        # return tool

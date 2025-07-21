@@ -1,8 +1,7 @@
 from operator import add, mul, sub, truediv
 
-from mcp_template_python.lib.better_mcp import BetterFastMCP
-
 from ..config import settings
+from ..lib.better_mcp import BetterFastMCP
 
 mcp = BetterFastMCP("math", settings=settings.instructions)
 
