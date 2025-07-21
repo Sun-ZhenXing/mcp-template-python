@@ -50,4 +50,6 @@ for name, mcp in MCP_MAP.items():
     if settings.enable_streamable_http:
         app.mount(f"/{name}", mcp.streamable_http_app())
     if settings.enable_websocket:
-        app.mount(f"/{name}/websocket", mcp.ws_app())
+        raise NotImplementedError(
+            "To use WebSocket, you need to switch to the `feat-ws` branch."
+        )

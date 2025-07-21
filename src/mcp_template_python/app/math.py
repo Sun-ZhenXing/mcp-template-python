@@ -1,9 +1,10 @@
 from operator import add, mul, sub, truediv
 
-from ..config import settings
-from ..lib.better_mcp import BetterFastMCP
+from mcp.server.fastmcp import FastMCP
 
-mcp = BetterFastMCP("math", settings=settings.instructions)
+from ..config import settings
+
+mcp = FastMCP("math", settings=settings.instructions)
 
 
 @mcp.tool()

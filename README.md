@@ -9,10 +9,7 @@ This project provides an MCP application template integrated with FastAPI.
 - [x] Support for SSE / StreamableHTTP / WebSocket
 - [x] Support for packaging and distribution
 
-Starting from v0.1.2, we use `BetterFastMCP` to replace `FastMCP`, providing more comprehensive features than the official `FastMCP`:
-
-- [x] Support for Pydantic models as input parameters, enabling more complex input parameter types and convenient description addition
-- [x] Support for WebSocket as transport layer, access by `/{mcp_name}/websocket/ws`
+To use WebSocket, you need to switch to the `feat-ws` branch.
 
 ## Getting Started
 

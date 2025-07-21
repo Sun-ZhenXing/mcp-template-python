@@ -9,10 +9,7 @@
 - [x] 支持 SSE / StreamableHTTP / WebSocket 兼容
 - [x] 支持打包分发
 
-从 v0.1.2 开始，我们使用 `BetterFastMCP` 替换 `FastMCP`，提供比官方 `FastMCP` 更完善的功能：
-
-- [x] 支持入参为 Pydantic 模型，以便支持更复杂的输入参数类型并方便添加描述
-- [x] 支持 WebSocket 作为传输层，通过 `/{mcp_name}/websocket/ws` 访问
+为了使用 WebSocket，你需要切换到 `feat-ws` 分支。
 
 ## 开始
 
