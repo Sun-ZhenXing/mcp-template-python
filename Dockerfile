@@ -13,7 +13,7 @@ ENV UV_DEFAULT_INDEX=${PYPI_MIRROR_URL}
 # Install dependencies
 RUN pip -V && \
     pip config set global.index-url ${PYPI_MIRROR_URL} && \
-    pip install uv
+    pip install --no-cache-dir uv
 RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache,sharing=locked \
     uv sync --no-dev --no-install-project
 
