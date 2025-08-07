@@ -2,6 +2,8 @@
   "recommendations": [
     "ms-python.python",
     "charliermarsh.ruff",
-    "fill-labs.dependi"
+    "fill-labs.dependi",
+    "EditorConfig.EditorConfig",
+    "tamasfe.even-better-toml"
   ]
 }

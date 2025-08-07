@@ -49,7 +49,3 @@ for name, mcp in MCP_MAP.items():
         app.mount(f"/{name}/compatible", mcp.sse_app())
     if settings.enable_streamable_http:
         app.mount(f"/{name}", mcp.streamable_http_app())
-    if settings.enable_websocket:
-        raise NotImplementedError(
-            "To use WebSocket, you need to switch to the `feat-ws` branch."
-        )

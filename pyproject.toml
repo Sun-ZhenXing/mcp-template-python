@@ -1,17 +1,16 @@
 [project]
 name = "mcp-template-python"
 version = "0.1.2"
-description = "Add your description here"
+description = "MCP Template for Python Projects"
 readme = "README.md"
 authors = [
     { name = "Sun-ZhenXing", email = "1006925066@qq.com" }
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
-    "fastapi[standard]>=0.116.1",
-    "mcp[cli]>=1.12.2",
-    "pydantic-settings>=2.10.1",
-    "rich>=14.0.0",
+    "fastapi[standard]>=0.115.0",
+    "mcp[cli]>=1.10.0",
+    "pydantic-settings>=2.5.0",
 ]
 
 [project.scripts]
@@ -28,3 +27,14 @@ path = "src/mcp_template_python/__about__.py"
 
 [tool.hatch.build.targets.sdist]
 only-include = ["src/mcp_template_python"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "TID"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.7",
+]

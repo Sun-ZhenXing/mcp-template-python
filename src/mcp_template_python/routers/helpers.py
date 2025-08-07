@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from ..app import MCP_MAP
-from ..models.helpers import ArgumentsRequest
+from mcp_template_python.app import MCP_MAP
+from mcp_template_python.models.helpers import ArgumentsRequest
 
 router = APIRouter(prefix="/v1", tags=["helpers"])
 

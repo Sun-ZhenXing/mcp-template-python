@@ -6,10 +6,8 @@ This project provides an MCP application template integrated with FastAPI.
 
 - [x] Support for multiple MCP mounting
 - [x] Support for command-line invocation in Stdio mode
-- [x] Support for SSE / StreamableHTTP / WebSocket
+- [x] Support for SSE / StreamableHTTP
 - [x] Support for packaging and distribution
-
-To use WebSocket, you need to switch to the `feat-ws` branch.
 
 ## Getting Started
 

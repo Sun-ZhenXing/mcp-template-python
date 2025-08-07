@@ -2,7 +2,7 @@ from operator import add, mul, sub, truediv
 
 from mcp.server.fastmcp import FastMCP
 
-from ..config import settings
+from mcp_template_python.config import settings
 
 mcp = FastMCP("math", instructions=settings.instructions)
 

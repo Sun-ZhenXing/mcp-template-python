@@ -40,9 +40,6 @@ class Settings(BaseSettings):
     enable_streamable_http: bool = True
     """Enable streamable HTTP for the MCP server."""
 
-    enable_websocket: bool = False
-    """Enable WebSocket for the MCP server."""
-
     websocket_path: str = "/ws"
     """Path for the WebSocket endpoint."""
 
