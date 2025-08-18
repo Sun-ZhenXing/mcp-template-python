@@ -4,7 +4,7 @@ version = "0.1.2"
 description = "MCP Template for Python Projects"
 readme = "README.md"
 authors = [
-    { name = "Sun-ZhenXing", email = "1006925066@qq.com" }
+    { name = "Alex Sun", email = "1006925066@qq.com" }
 ]
 requires-python = ">=3.10"
 dependencies = [
