@@ -10,13 +10,12 @@ requires-python = ">=3.10"
 dependencies = [
     "fastapi[standard]>=0.115.0",
     "mcp[cli]>=1.10.0",
+    "pydantic>=2.11.7",
     "pydantic-settings>=2.5.0",
 ]
 
 [project.scripts]
 mcp-template-python = "mcp_template_python.__main__:main"
-dev = "mcp_template_python.__main__:dev"
-prod = "mcp_template_python.__main__:main"
 
 [build-system]
 requires = ["hatchling"]

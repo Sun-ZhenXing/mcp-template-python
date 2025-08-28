@@ -14,13 +14,13 @@ This project provides an MCP application template integrated with FastAPI.
 Install dependencies:
 
 ```bash
-uv sync
+make
 ```
 
 Development:
 
 ```bash
-uv run dev
+make dev
 ```
 
 You can access the example MCP interface (Streamable HTTP) via <http://127.0.0.1:3001/math/mcp>, or access the SSE interface via <http://127.0.0.1:3001/math/compatible/sse>.
@@ -28,7 +28,7 @@ You can access the example MCP interface (Streamable HTTP) via <http://127.0.0.1
 Call via command line with `--stdio`:
 
 ```bash
-uv run prod --stdio
+make prod -- --stdio
 ```
 
 ## Deployment
@@ -36,13 +36,13 @@ uv run prod --stdio
 Production:
 
 ```bash
-uv run --no-sync prod
+make prod
 ```
 
 Build Python Wheel package:
 
 ```bash
-uv build
+make build
 ```
 
 ## Docker Deployment

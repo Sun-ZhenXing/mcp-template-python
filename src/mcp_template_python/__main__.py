@@ -60,10 +60,8 @@ def main():
     else:
         import uvicorn
 
-        from .server import app
-
         uvicorn.run(
-            app,
+            f"{__module_name__}.server:app",
             host=args.host,
             port=args.port,
         )
