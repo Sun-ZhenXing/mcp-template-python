@@ -5,6 +5,28 @@ from .__about__ import __module_name__, __version__
 from .config import settings
 
 
+def run_server(
+    module: str | None = None,
+    host: str = settings.default_host,
+    port: int = settings.default_port,
+    reload: bool = False,
+    **kwargs,
+):
+    """Run the MCP server in development mode."""
+    import uvicorn
+
+    if module is None:
+        module = f"{__module_name__}.server:app"
+
+    uvicorn.run(
+        module,
+        host=host,
+        port=port,
+        reload=reload,
+        **kwargs,
+    )
+
+
 def main():
     from .app import MCP_MAP
 
@@ -47,10 +69,6 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.dev:
-        dev(args.host, args.port)
-        sys.exit(0)
-
     if args.stdio:
         mcp = MCP_MAP.get(args.mcp)
         if mcp is None:
@@ -58,28 +76,16 @@ def main():
             sys.exit(1)
         mcp.run()
     else:
-        import uvicorn
-
-        uvicorn.run(
-            f"{__module_name__}.server:app",
+        run_server(
             host=args.host,
             port=args.port,
+            reload=args.dev,
         )
 
 
-def dev(
-    host: str = settings.default_host,
-    port: int = settings.default_port,
-):
-    """Run the MCP server in development mode."""
-    import uvicorn
-
-    uvicorn.run(
-        f"{__module_name__}.server:app",
-        host=host,
-        port=port,
-        reload=True,
-    )
+def dev():
+    """Run the server in development mode."""
+    run_server(reload=True)
 
 
 if __name__ == "__main__":

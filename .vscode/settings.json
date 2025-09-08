@@ -21,6 +21,7 @@
     "fastmcp",
     "localtime",
     "mcps",
+    "noninteractive",
     "pydantic",
     "PYPI",
     "pyproject",
