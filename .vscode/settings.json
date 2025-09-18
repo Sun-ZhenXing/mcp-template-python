@@ -17,6 +17,7 @@
   ],
   "files.eol": "\n",
   "cSpell.words": [
+    "dotenv",
     "fastapi",
     "fastmcp",
     "localtime",

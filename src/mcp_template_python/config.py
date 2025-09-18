@@ -1,4 +1,7 @@
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+load_dotenv()
 
 
 class Settings(BaseSettings):
@@ -8,8 +11,6 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_prefix="MCP_",
-        env_file=".env",
-        env_file_encoding="utf-8",
         extra="allow",
     )
 

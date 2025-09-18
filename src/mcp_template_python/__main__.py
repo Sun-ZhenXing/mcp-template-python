@@ -1,7 +1,9 @@
-import argparse
 import sys
 
+import click
+
 from .__about__ import __module_name__, __version__
+from .app import MCP_MAP
 from .config import settings
 
 
@@ -27,62 +29,62 @@ def run_server(
     )
 
 
-def main():
-    from .app import MCP_MAP
-
-    parser = argparse.ArgumentParser(description="MCP Server")
-
-    parser.add_argument(
-        "--stdio",
-        action="store_true",
-        help="Run the server with STDIO (default: False)",
-    )
-    parser.add_argument(
-        "--mcp",
-        type=str,
-        default=settings.default_mcp,
-        choices=list(MCP_MAP.keys()),
-        help=f"Select the MCP to run in STDIO mode (default: {settings.default_mcp})",
-    )
-    parser.add_argument(
-        "--host",
-        default=settings.default_host,
-        help=f"Host to bind to (default: {settings.default_host})",
-    )
-    parser.add_argument(
-        "--port",
-        type=int,
-        default=settings.default_port,
-        help=f"Port to listen on (default: {settings.default_port})",
-    )
-    parser.add_argument(
-        "--dev",
-        default=False,
-        action="store_true",
-        help="Run the server in development mode (default: False)",
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version=f"%(prog)s {__version__}",
-        help="Show the version of the MCP server",
-    )
-    args = parser.parse_args()
-
-    if args.stdio:
-        mcp = MCP_MAP.get(args.mcp)
-        if mcp is None:
-            print(f"Error: MCP '{args.mcp}' not found.")
+@click.command()
+@click.option(
+    "--stdio",
+    is_flag=True,
+    help="Run the server with STDIO (default: False)",
+)
+@click.option(
+    "--mcp",
+    type=click.Choice(list(MCP_MAP.keys()), case_sensitive=False),
+    default=settings.default_mcp,
+    help=f"Select the MCP to run in STDIO mode (default: {settings.default_mcp})",
+)
+@click.option(
+    "--host",
+    default=settings.default_host,
+    help=f"Host to bind to (default: {settings.default_host})",
+)
+@click.option(
+    "--port",
+    type=int,
+    default=settings.default_port,
+    help=f"Port to listen on (default: {settings.default_port})",
+)
+@click.option(
+    "--dev",
+    is_flag=True,
+    help="Run the server in development mode (default: False)",
+)
+@click.version_option(
+    version=__version__,
+    prog_name="mcp-template-python",
+    help="Show the version of the MCP server",
+)
+def main(
+    stdio: bool,
+    mcp: str,
+    host: str,
+    port: int,
+    dev: bool,
+):
+    """MCP Server"""
+    if stdio:
+        selected_mcp = MCP_MAP.get(mcp)
+        if selected_mcp is None:
+            click.echo(f"Error: MCP '{mcp}' not found.", err=True)
             sys.exit(1)
-        mcp.run()
+        selected_mcp.run()
     else:
         run_server(
-            host=args.host,
-            port=args.port,
-            reload=args.dev,
+            host=host,
+            port=port,
+            reload=dev,
         )
 
 
+@click.command()
 def dev():
     """Run the server in development mode."""
     run_server(reload=True)

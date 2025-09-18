@@ -3,11 +3,10 @@ name = "mcp-template-python"
 version = "0.1.2"
 description = "MCP Template for Python Projects"
 readme = "README.md"
-authors = [
-    { name = "Alex Sun", email = "1006925066@qq.com" }
-]
+authors = []
 requires-python = ">=3.10"
 dependencies = [
+    "click>=8.0.0",
     "fastapi[standard]>=0.115.0",
     "mcp[cli]>=1.10.0",
     "pydantic>=2.11.7",

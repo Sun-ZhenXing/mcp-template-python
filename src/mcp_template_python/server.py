@@ -1,6 +1,6 @@
 import contextlib
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 
 from .__about__ import __version__
 from .app import MCP_MAP
@@ -27,10 +27,7 @@ app = FastAPI(
 @app.get("/")
 async def root():
     """Root endpoint."""
-    return {
-        "message": "Welcome!",
-        "tools": list(MCP_MAP.keys()),
-    }
+    return Response("<script>location.href='/docs'</script>")
 
 
 @app.get("/health")
