@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 
+# Production configuration
+values-production.yaml
+
 # Python-generated files
 __pycache__/
 *.py[oc]

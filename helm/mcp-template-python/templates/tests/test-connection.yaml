@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "mcp-template-python.fullname" . }}-test-connection"
+  labels:
+    {{- include "mcp-template-python.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "mcp-template-python.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

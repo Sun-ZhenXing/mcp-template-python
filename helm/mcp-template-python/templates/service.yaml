@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mcp-template-python.fullname" . }}
+  labels:
+    {{- include "mcp-template-python.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort | default .Values.service.port }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mcp-template-python.selectorLabels" . | nindent 4 }}

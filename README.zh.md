@@ -14,13 +14,13 @@
 安装依赖：
 
 ```bash
-uv sync
+make
 ```
 
 开发：
 
 ```bash
-uv run dev
+make dev
 ```
 
 可通过 <http://127.0.0.1:3001/math/mcp> 访问示例 MCP 接口（Streamable HTTP），或 <http://127.0.0.1:3001/math/compatible/sse> 访问 SSE 接口。
@@ -28,7 +28,7 @@ uv run dev
 通过 `--stdio` 来调用命令行：
 
 ```bash
-uv run prod --stdio
+make prod -- --stdio
 ```
 
 ## 部署
@@ -36,13 +36,13 @@ uv run prod --stdio
 生产：
 
 ```bash
-uv run --no-sync prod
+make prod
 ```
 
 构建 Python Wheel 包：
 
 ```bash
-uv build
+make build
 ```
 
 ## Docker 部署

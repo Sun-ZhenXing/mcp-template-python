@@ -408,7 +408,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "click", specifier = ">=8.2.1" },
+    { name = "click", specifier = ">=8.0.0" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.0" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.10.0" },
     { name = "pydantic", specifier = ">=2.11.7" },
