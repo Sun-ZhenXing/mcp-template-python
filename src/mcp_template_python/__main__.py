@@ -2,6 +2,8 @@ import sys
 
 import click
 
+from mcp_template_python.utils.log import UVICORN_LOGGING_CONFIG
+
 from .__about__ import __module_name__, __version__
 from .app import MCP_MAP
 from .config import settings
@@ -25,6 +27,7 @@ def run_server(
         host=host,
         port=port,
         reload=reload,
+        log_config=UVICORN_LOGGING_CONFIG,
         **kwargs,
     )
 
