@@ -1,36 +1,36 @@
-# MCP Template Python - Helm Chart 配置说明
+# MCP Template Python - Helm Chart Configuration Guide
 
-## 快速开始
+## Quick Start
 
-### 1. 基础部署
+### 1. Basic Deployment
 
 ```bash
-# 验证配置
+# Validate configuration
 make helm-lint
 
-# 开发环境部署
+# Development environment deployment
 make helm-install
 
-# 更新部署
+# Update deployment
 make helm-upgrade
 
-# 卸载
+# Uninstall
 make helm-uninstall
 ```
 
-### 2. 生产环境部署
+### 2. Production Environment Deployment
 
 ```bash
-# 首次部署
+# Initial deployment
 make helm-install-prod
 
-# 更新部署
+# Update deployment
 make helm-upgrade-prod
 ```
 
-## 核心配置
+## Core Configuration
 
-### 镜像配置
+### Image Configuration
 
 ```yaml
 image:
@@ -39,7 +39,7 @@ image:
   pullPolicy: IfNotPresent
 ```
 
-### 服务配置
+### Service Configuration
 
 ```yaml
 service:
@@ -48,7 +48,7 @@ service:
   targetPort: 3001
 ```
 
-### 环境变量
+### Environment Variables
 
 ```yaml
 env:
@@ -56,7 +56,7 @@ env:
   MCP_DEFAULT_PORT: "3001"
 ```
 
-### 健康检查
+### Health Checks
 
 ```yaml
 livenessProbe:
@@ -72,9 +72,9 @@ readinessProbe:
   initialDelaySeconds: 5
 ```
 
-## 生产环境配置要点
+## Production Environment Configuration
 
-### 1. 资源配置（必须设置）
+### 1. Resource Configuration (Required)
 
 ```yaml
 resources:
@@ -86,7 +86,7 @@ resources:
     memory: 256Mi
 ```
 
-### 2. 镜像仓库
+### 2. Image Registry
 
 ```yaml
 image:
@@ -94,7 +94,7 @@ image:
   tag: "v1.0.0"
 ```
 
-### 3. 自动扩展
+### 3. Auto Scaling
 
 ```yaml
 autoscaling:
@@ -104,7 +104,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 70
 ```
 
-### 4. Ingress 配置
+### 4. Ingress Configuration
 
 ```yaml
 ingress:
@@ -117,23 +117,23 @@ ingress:
           pathType: ImplementationSpecific
 ```
 
-## 配置文件管理
+## Configuration File Management
 
-### ConfigMap 配置
+### ConfigMap Configuration
 
 ```yaml
 configMap:
   enabled: true
   data:
     app.conf: |
-      # 应用配置
+      # Application configuration
       log_level=info
       debug=false
 ```
 
-### 挂载配置文件
+### Mounting Configuration Files
 
-在 `values.yaml` 中添加：
+Add to `values.yaml`:
 
 ```yaml
 volumeMounts:
@@ -147,9 +147,9 @@ volumes:
       name: mcp-template-python-config
 ```
 
-## 安全配置
+## Security Configuration
 
-应用运行在非 root 用户下：
+Application runs as non-root user:
 
 ```yaml
 securityContext:
@@ -160,73 +160,73 @@ securityContext:
     - ALL
 ```
 
-## 部署前检查清单
+## Pre-Deployment Checklist
 
-### 开发环境
+### Development Environment
 
-- [ ] 修改 `values.yaml` 中的镜像仓库
-- [ ] 确认端口配置
-- [ ] 设置环境变量
+- [ ] Update image repository in `values.yaml`
+- [ ] Confirm port configuration
+- [ ] Set environment variables
 
-### 生产环境
+### Production Environment
 
-- [ ] 更新 `values-production.yaml` 中的镜像标签
-- [ ] 设置资源限制和请求
-- [ ] 配置域名和 TLS
-- [ ] 确认副本数量
-- [ ] 检查健康检查路径
+- [ ] Update image tag in `values-production.yaml`
+- [ ] Set resource limits and requests
+- [ ] Configure domain name and TLS
+- [ ] Confirm replica count
+- [ ] Check health check paths
 
-## 常用命令
+## Common Commands
 
 ```bash
-# 查看部署状态
+# Check deployment status
 kubectl get pods -l app.kubernetes.io/name=mcp-template-python
 
-# 查看服务
+# Check service
 kubectl get svc mcp-template-python
 
-# 查看日志
+# View logs
 kubectl logs -l app.kubernetes.io/name=mcp-template-python
 
-# 进入容器
+# Enter container
 kubectl exec -it deployment/mcp-template-python -- /bin/bash
 
-# 查看配置
+# View configuration
 helm get values mcp-template-python
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 常见问题
+### Common Issues
 
-1. **Pod 启动失败**
-   - 检查镜像是否存在
-   - 确认资源配置是否合理
-   - 查看 Pod 事件：`kubectl describe pod <pod-name>`
+1. **Pod Startup Failure**
+   - Check if image exists
+   - Confirm resource configuration is reasonable
+   - View Pod events: `kubectl describe pod <pod-name>`
 
-2. **健康检查失败**
-   - 确认应用是否提供 `/health` 端点
-   - 检查端口配置是否正确
-   - 调整探针延迟时间
+2. **Health Check Failure**
+   - Confirm application provides `/health` endpoint
+   - Check port configuration is correct
+   - Adjust probe delay times
 
-3. **服务无法访问**
-   - 确认 Service 配置
-   - 检查网络策略
-   - 验证 Ingress 配置
+3. **Service Inaccessible**
+   - Confirm Service configuration
+   - Check network policies
+   - Verify Ingress configuration
 
-### 获取帮助
+### Getting Help
 
 ```bash
-# 查看 Chart 信息
+# View Chart information
 helm show chart helm/mcp-template-python
 
-# 查看所有配置选项
+# View all configuration options
 helm show values helm/mcp-template-python
 
-# 验证模板渲染
+# Validate template rendering
 helm template mcp-template-python helm/mcp-template-python
 ```
 
 ---
 
-**注意**：生产环境部署前，请务必更新 `values-production.yaml` 中的资源配置和域名设置。
+**Note**: Before production deployment, make sure to update the resource configuration and domain settings in `values-production.yaml`.

@@ -6,7 +6,7 @@ x-default: &default
   logging:
     driver: json-file
     options:
-      max-size: 1m
+      max-size: 100m
 
 services:
   app:
@@ -16,8 +16,16 @@ services:
       dockerfile: Dockerfile
       args:
         - PORT=${PORT:-3001}
-    image: ${DOCKER_REGISTRY:-docker.io}/{SERVICE_NAME:-mcp-template-python}:${BUILD_VERSION:-latest}
+    image: ${DOCKER_REGISTRY:-docker.io}/${SERVICE_NAME:-mcp-template-python}:${BUILD_VERSION:-latest}
     ports:
-      - "${EXPOSE_PORT:-3001}:${PORT:-3001}"
+      - "${MCP_PORT_OVERRIDE:-3001}:${PORT:-3001}"
     env_file:
       - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
