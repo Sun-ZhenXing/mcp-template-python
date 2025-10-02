@@ -1,10 +1,10 @@
-.PHONY: i dev prod build clean update docker-build docker-run helm-install helm-upgrade helm-uninstall helm-lint
+.PHONY: i dev prod build clean update lint docker-build docker-run helm-install helm-upgrade helm-uninstall helm-lint
 
 i:
 	uv sync --all-extras --all-packages $(filter-out i,$(MAKECMDGOALS))
 
 dev:
-	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.dev()" $(filter-out dev,$(MAKECMDGOALS))
+	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.dev()" $(filter-out dev,$(MAKECMDGOALS)) || echo shutdown
 
 prod:
 	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.main()" $(filter-out prod,$(MAKECMDGOALS))
@@ -17,6 +17,9 @@ clean:
 
 update:
 	uv sync --all-extras --all-packages -U $(filter-out update,$(MAKECMDGOALS))
+
+lint:
+	uv run ruff check . $(filter-out lint,$(MAKECMDGOALS))
 
 docker-build:
 	docker compose build $(filter-out docker-build,$(MAKECMDGOALS))

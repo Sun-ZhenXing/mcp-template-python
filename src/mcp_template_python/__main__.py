@@ -2,8 +2,6 @@ import sys
 
 import click
 
-from mcp_template_python.utils.log import UVICORN_LOGGING_CONFIG
-
 from .__about__ import __module_name__, __version__
 from .app import MCP_MAP
 from .config import settings
@@ -27,7 +25,7 @@ def run_server(
         host=host,
         port=port,
         reload=reload,
-        log_config=UVICORN_LOGGING_CONFIG,
+        log_config=None,
         **kwargs,
     )
 
@@ -41,8 +39,8 @@ def run_server(
 @click.option(
     "--mcp",
     type=click.Choice(list(MCP_MAP.keys()), case_sensitive=False),
-    default=settings.default_mcp,
-    help=f"Select the MCP to run in STDIO mode (default: {settings.default_mcp})",
+    default=settings.mcp.default_mcp,
+    help=f"Select the MCP to run in STDIO mode (default: {settings.mcp.default_mcp})",
 )
 @click.option(
     "--host",

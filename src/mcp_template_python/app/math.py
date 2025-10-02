@@ -4,7 +4,7 @@ from mcp.server.fastmcp import FastMCP
 
 from mcp_template_python.config import settings
 
-mcp = FastMCP("math", instructions=settings.instructions)
+mcp = FastMCP("math", instructions=settings.mcp.instructions)
 
 
 @mcp.tool()

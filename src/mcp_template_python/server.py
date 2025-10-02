@@ -1,6 +1,7 @@
 import contextlib
 
 from fastapi import FastAPI, Response
+from fastapi.middleware.cors import CORSMiddleware
 
 from .__about__ import __version__
 from .app import MCP_MAP
@@ -17,10 +18,18 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title=settings.app_title,
-    description=settings.app_description,
+    title=settings.title,
+    description=settings.description,
     version=__version__,
     lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors.allow_origins.split(","),
+    allow_credentials=settings.cors.allow_credentials,
+    allow_methods=settings.cors.allow_methods.split(","),
+    allow_headers=settings.cors.allow_headers.split(","),
 )
 
 
@@ -38,11 +47,11 @@ async def health():
     }
 
 
-if settings.enable_helpers_router:
+if settings.mcp.enable_helpers_router:
     app.include_router(helpers_router)
 
 for name, mcp in MCP_MAP.items():
-    if settings.enable_sse:
+    if settings.mcp.enable_sse:
         app.mount(f"/{name}/compatible", mcp.sse_app())
-    if settings.enable_streamable_http:
+    if settings.mcp.enable_streamable_http:
         app.mount(f"/{name}", mcp.streamable_http_app())

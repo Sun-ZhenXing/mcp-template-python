@@ -1,6 +1,6 @@
 [project]
 name = "mcp-template-python"
-version = "0.1.2"
+version = "0.1.3"
 description = "MCP Template for Python Projects"
 readme = "README.md"
 authors = []
