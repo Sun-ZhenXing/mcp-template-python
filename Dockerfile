@@ -1,5 +1,5 @@
 ARG PYPI_MIRROR_URL=https://pypi.org/simple
-ARG DEBIAN_MIRROR=ftp.cn.debian.org
+ARG DEBIAN_MIRROR=deb.debian.org
 
 # Base stage
 FROM python:3.12-bookworm AS deps

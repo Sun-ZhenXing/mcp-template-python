@@ -2,6 +2,7 @@ import contextlib
 
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi_radar import Radar
 
 from .__about__ import __version__
 from .app import MCP_MAP
@@ -31,6 +32,9 @@ app.add_middleware(
     allow_methods=settings.cors.allow_methods.split(","),
     allow_headers=settings.cors.allow_headers.split(","),
 )
+
+radar = Radar(app)
+radar.create_tables()
 
 
 @app.get("/")

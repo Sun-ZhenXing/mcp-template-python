@@ -1,4 +1,4 @@
-.PHONY: i dev prod build clean update lint docker-build docker-run helm-install helm-upgrade helm-uninstall helm-lint
+.PHONY: i dev prod build clean update lint docker-build docker-run helm-install helm-upgrade helm-uninstall helm-lint rename
 
 i:
 	uv sync --all-extras --all-packages $(filter-out i,$(MAKECMDGOALS))
@@ -27,7 +27,6 @@ docker-build:
 docker-run:
 	docker compose up -d $(filter-out docker-run,$(MAKECMDGOALS))
 
-# Helm deployment commands
 helm-lint:
 	helm lint helm/mcp-template-python
 
@@ -45,6 +44,9 @@ helm-upgrade-prod:
 
 helm-uninstall:
 	helm uninstall mcp-template-python
+
+rename:
+	uv run python tools/rename.py $(filter-out rename,$(MAKECMDGOALS))
 
 %:
 	@:
