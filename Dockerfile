@@ -70,4 +70,4 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:${PORT}/health || exit 1
 
 EXPOSE ${PORT}
-CMD ["sh", "-c", "uv run --no-sync prod --host 0.0.0.0 --port ${PORT}"]
+CMD ["sh", "-c", "uv run --no-sync mcp-template-python --host 0.0.0.0 --port ${PORT}"]

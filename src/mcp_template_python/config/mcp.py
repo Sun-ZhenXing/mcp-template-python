@@ -8,7 +8,7 @@ class MCPSettings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_prefix="MCP_",
-        extra="allow",
+        extra="ignore",
     )
 
     default_mcp: str = "math"

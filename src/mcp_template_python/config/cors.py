@@ -8,7 +8,7 @@ class CORSSettings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_prefix="CORS_",
-        extra="allow",
+        extra="ignore",
     )
 
     allow_origins: str = "*"

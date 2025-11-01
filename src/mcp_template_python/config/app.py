@@ -15,7 +15,7 @@ class AppSettings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_prefix="APP_",
-        extra="allow",
+        extra="ignore",
     )
 
     mcp: MCPSettings = MCPSettings()

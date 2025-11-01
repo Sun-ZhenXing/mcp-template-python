@@ -1,3 +1,6 @@
+# Trace files
+radar.duckdb*
+
 # Environment files
 .env
 .env.*
