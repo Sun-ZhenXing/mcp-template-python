@@ -2,7 +2,7 @@ ARG PYPI_MIRROR_URL=https://pypi.org/simple
 ARG DEBIAN_MIRROR=deb.debian.org
 
 # Base stage
-FROM python:3.12-bookworm AS deps
+FROM python:3.13-trixie AS deps
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PYPI_MIRROR_URL
 WORKDIR /app
@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache,sharing=locked \
     uv sync --no-dev --no-install-project
 
 # Runner stage
-FROM python:3.12-slim-bookworm AS runner
+FROM python:3.13-slim-trixie AS runner
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DEBIAN_MIRROR
 ARG PYPI_MIRROR_URL

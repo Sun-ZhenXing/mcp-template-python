@@ -27,6 +27,7 @@
     "PYPI",
     "pyproject",
     "streamable",
+    "trixie",
     "uvicorn",
     "venv"
   ]
