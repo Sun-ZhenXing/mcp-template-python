@@ -11,6 +11,9 @@ class CORSSettings(BaseSettings):
         extra="ignore",
     )
 
+    allow_hosts: str = "*"
+    """CORS allow hosts, defaults to '*'."""
+
     allow_origins: str = "*"
     """CORS allow origins, defaults to '*'."""
 

@@ -25,3 +25,6 @@ class MCPSettings(BaseSettings):
 
     enable_streamable_http: bool = True
     """Enable streamable HTTP for the MCP server."""
+
+    enable_dns_rebinding_protection: bool = True
+    """Enable DNS rebinding protection for MCP server."""

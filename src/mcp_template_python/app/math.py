@@ -1,10 +1,19 @@
 from operator import add, mul, sub, truediv
 
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 
 from mcp_template_python.config import settings
 
-mcp = FastMCP("math", instructions=settings.mcp.instructions)
+mcp = FastMCP(
+    "math",
+    instructions=settings.mcp.instructions,
+    transport_security=TransportSecuritySettings(
+        allowed_hosts=settings.cors.allow_hosts.split(","),
+        allowed_origins=settings.cors.allow_origins.split(","),
+        enable_dns_rebinding_protection=settings.mcp.enable_dns_rebinding_protection,
+    ),
+)
 
 
 @mcp.tool()
