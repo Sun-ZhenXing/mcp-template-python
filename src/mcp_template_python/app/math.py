@@ -13,6 +13,7 @@ mcp = FastMCP(
         allowed_origins=settings.cors.allow_origins.split(","),
         enable_dns_rebinding_protection=settings.mcp.enable_dns_rebinding_protection,
     ),
+    stateless_http=settings.mcp.stateless_http,
 )
 
 

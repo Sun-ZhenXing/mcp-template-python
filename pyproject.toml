@@ -36,4 +36,5 @@ ban-relative-imports = "parents"
 [dependency-groups]
 dev = [
     "ruff>=0.12.7",
+    "ty>=0.0.15",
 ]

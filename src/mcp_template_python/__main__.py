@@ -76,6 +76,7 @@ def main(
         if selected_mcp is None:
             click.echo(f"Error: MCP '{mcp}' not found.", err=True)
             sys.exit(1)
+        assert selected_mcp is not None
         selected_mcp.run()
     else:
         run_server(

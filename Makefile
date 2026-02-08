@@ -1,54 +1,54 @@
+ARGS ?=
+
 .PHONY: i dev prod build clean update lint docker-build docker-run helm-install helm-upgrade helm-uninstall helm-lint rename
 
-args := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
-
 i:
-	uv sync --all-extras --all-packages $(args)
+	uv sync --all-extras --all-packages $(ARGS)
 
 dev:
-	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.dev()" $(args) || echo shutdown
+	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.dev()" $(ARGS) || echo shutdown
 
 prod:
-	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.main()" $(args)
+	uv run --no-sync python -c "__import__('mcp_template_python.__main__').__main__.main()" $(ARGS)
 
 build:
-	uv build $(args)
+	uv build $(ARGS)
 
 clean:
-	rm -rf .venv .ruff_cache dist/ build/ *.egg-info $(args)
+	rm -rf .venv .ruff_cache dist/ build/ *.egg-info $(ARGS)
 
 update:
-	uv sync --all-extras --all-packages -U $(args)
+	uv sync --all-extras --all-packages -U $(ARGS)
 
 lint:
-	uv run ruff check . $(args)
+	uv run ruff check . && uv run ty check .
 
 docker-build:
-	docker compose build $(args)
+	docker compose build $(ARGS)
 
 docker-run:
-	docker compose up -d $(args)
+	docker compose up -d $(ARGS)
 
 helm-lint:
-	helm lint helm/mcp-template-python $(args)
+	helm lint helm/mcp-template-python $(ARGS)
 
 helm-install:
-	helm install mcp-template-python helm/mcp-template-python $(args)
+	helm install mcp-template-python helm/mcp-template-python $(ARGS)
 
 helm-upgrade:
-	helm upgrade mcp-template-python helm/mcp-template-python $(args)
+	helm upgrade mcp-template-python helm/mcp-template-python $(ARGS)
 
 helm-install-prod:
-	helm install mcp-template-python helm/mcp-template-python -f values-production.yaml $(args)
+	helm install mcp-template-python helm/mcp-template-python -f values-production.yaml $(ARGS)
 
 helm-upgrade-prod:
-	helm upgrade mcp-template-python helm/mcp-template-python -f values-production.yaml $(args)
+	helm upgrade mcp-template-python helm/mcp-template-python -f values-production.yaml $(ARGS)
 
 helm-uninstall:
-	helm uninstall mcp-template-python $(args)
+	helm uninstall mcp-template-python $(ARGS)
 
 rename:
-	uv run python tools/rename.py $(args)
+	uv run python tools/rename.py $(ARGS)
 
 %:
 	@true

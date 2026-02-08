@@ -14,17 +14,20 @@ class MCPSettings(BaseSettings):
     default_mcp: str = "math"
     """Default MCP to be used by the application."""
 
+    stateless_http: bool = True
+    """Whether the MCP server should operate in stateless mode."""
+
     instructions: str | None = None
     """Instructions to be used by the MCP server, defaults to None."""
 
     enable_helpers_router: bool = True
     """Enable the helpers router for the MCP server."""
 
-    enable_sse: bool = True
+    enable_sse: bool = False
     """Enable Server-Sent Events (SSE) for the MCP server."""
 
     enable_streamable_http: bool = True
     """Enable streamable HTTP for the MCP server."""
 
-    enable_dns_rebinding_protection: bool = True
+    enable_dns_rebinding_protection: bool = False
     """Enable DNS rebinding protection for MCP server."""
