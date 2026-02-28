@@ -72,6 +72,7 @@ TEXT_EXTENSIONS = {
     ".dockerignore",
     "Makefile",
     "Dockerfile",
+    ".tpl",
 }
 
 
