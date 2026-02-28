@@ -23,9 +23,6 @@ class MCPSettings(BaseSettings):
     enable_helpers_router: bool = True
     """Enable the helpers router for the MCP server."""
 
-    enable_sse: bool = False
-    """Enable Server-Sent Events (SSE) for the MCP server."""
-
     enable_streamable_http: bool = True
     """Enable streamable HTTP for the MCP server."""
 

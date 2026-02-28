@@ -51,7 +51,5 @@ if settings.mcp.enable_helpers_router:
     app.include_router(helpers_router)
 
 for name, mcp in MCP_MAP.items():
-    if settings.mcp.enable_sse:
-        app.mount(f"/{name}/compatible", mcp.sse_app())
     if settings.mcp.enable_streamable_http:
         app.mount(f"/{name}", mcp.streamable_http_app())

@@ -6,7 +6,7 @@ This project provides an MCP application template integrated with FastAPI.
 
 - [x] Support for multiple MCP mounting
 - [x] Support for command-line invocation in Stdio mode
-- [x] Support for SSE / StreamableHTTP
+- [x] Support for StreamableHTTP
 - [x] Support for packaging and distribution
 
 ## Getting Started
@@ -23,7 +23,7 @@ Development:
 make dev
 ```
 
-You can access the example MCP interface (Streamable HTTP) via <http://127.0.0.1:3001/math/mcp>, or access the SSE interface via <http://127.0.0.1:3001/math/compatible/sse>.
+You can access the example MCP interface (Streamable HTTP).
 
 Call via command line with `--stdio`:
 
