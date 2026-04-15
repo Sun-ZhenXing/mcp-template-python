@@ -31,6 +31,8 @@
     "pydantic",
     "PYPI",
     "pyproject",
+    "pytest",
+    "sdist",
     "streamable",
     "trixie",
     "uvicorn",
