@@ -1,8 +1,5 @@
 x-default: &default
   restart: unless-stopped
-  volumes:
-    - &localtime /etc/localtime:/etc/localtime:ro
-    - &timezone /etc/timezone:/etc/timezone:ro
   logging:
     driver: json-file
     options:
@@ -16,7 +13,7 @@ services:
       dockerfile: Dockerfile
       args:
         - PORT=${PORT:-3001}
-    image: ${DOCKER_REGISTRY:-docker.io}/${SERVICE_NAME:-mcp-template-python}:${BUILD_VERSION:-latest}
+    image: ${DOCKER_REGISTRY:-docker.io}/local/${SERVICE_NAME:-mcp-template-python}:${BUILD_VERSION:-latest}
     ports:
       - "${MCP_PORT_OVERRIDE:-3001}:${PORT:-3001}"
     env_file:
@@ -25,7 +22,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: 1024Mi
+          memory: 1024M
         reservations:
           cpus: '0.1'
-          memory: 256Mi
+          memory: 256M

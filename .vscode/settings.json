@@ -22,6 +22,7 @@
   ],
   "files.eol": "\n",
   "cSpell.words": [
+    "asyncio",
     "dotenv",
     "fastapi",
     "fastmcp",

@@ -1,35 +1,6 @@
+FROM python:3.13-slim-trixie
 ARG PYPI_MIRROR_URL=https://pypi.org/simple
 ARG DEBIAN_MIRROR=deb.debian.org
-
-# Base stage
-FROM python:3.13-trixie AS deps
-ARG DEBIAN_FRONTEND=noninteractive
-ARG PYPI_MIRROR_URL
-WORKDIR /app
-
-COPY pyproject.toml uv.lock .python-version ./
-
-ENV UV_DEFAULT_INDEX=${PYPI_MIRROR_URL}
-
-# Install dependencies
-RUN pip -V && \
-    pip config set global.index-url ${PYPI_MIRROR_URL} && \
-    pip install --no-cache-dir uv
-
-# Sync dependencies
-RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache,sharing=locked \
-    uv sync --no-dev --no-install-project
-
-# Runner stage
-FROM python:3.13-slim-trixie AS runner
-ARG DEBIAN_FRONTEND=noninteractive
-ARG DEBIAN_MIRROR
-ARG PYPI_MIRROR_URL
-
-# rootless user args
-ARG APP_USER=app
-ARG APP_UID=1000
-ARG APP_GID=1000
 WORKDIR /app
 
 RUN sed -i "s/deb.debian.org/${DEBIAN_MIRROR}/g" /etc/apt/sources.list.d/debian.sources && \
@@ -43,15 +14,9 @@ RUN pip -V && \
     pip config set global.index-url ${PYPI_MIRROR_URL} && \
     pip install --no-cache-dir uv
 
-# Create non-root user/group for rootless execution
-RUN groupadd -g ${APP_GID} ${APP_USER} && \
-    useradd -m -u ${APP_UID} -g ${APP_GID} -s /bin/bash ${APP_USER}
+COPY . ./
 
-# Copy venv and sources with proper ownership
-COPY --from=deps --chown=${APP_UID}:${APP_GID} /app/.venv/ ./.venv/
-COPY --chown=${APP_UID}:${APP_GID} . ./
-
-# Ensure dependencies sync
+ENV UV_DEFAULT_INDEX=${PYPI_MIRROR_URL}
 RUN --mount=type=cache,target=/root/.cache/uv,id=uv-cache,sharing=locked \
     uv sync --no-dev && \
     chown -R ${APP_UID}:${APP_GID} /app
